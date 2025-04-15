@@ -212,79 +212,49 @@ h1 {
   margin-bottom: 20px;
 }
 .grid {
-  display: inline-block;
-  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 .row {
   display: flex;
 }
 .cell {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  margin: 5px;
+  aspect-ratio: 1;
   background-color: #FFD25C;
-  border-radius: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-.home {
+.cell:hover {
+  background-color: #FFE07D;
+}
+.cell.selected {
+  background-color: #4666BE;
+  color: white;
+}
+.game-info {
   text-align: center;
-  padding: 20px;
-}
-h1 {
-  font-size: 2em;
   margin-bottom: 20px;
 }
-.grid {
-  display: inline-block;
-  border: 1px solid #ccc;
-}
-.row {
+.scores {
   display: flex;
-}
-.cell {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #ccc;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  margin: 5px;
-  background-color: #FFD25C; 
+  gap: 20px;
+  margin: 10px 0;
 }
-.home {
+.current-player {
   text-align: center;
-  padding: 20px;
+  margin: 10px 0;
 }
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-.grid {
-  display: inline-block;
-  border: 1px solid #ccc;
-}
-.row {
-  display: flex;
-}
-.cell {
-  width: 70px;
-  height: 70px;
-  border: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  margin: 4px;
-  background-color: #FFD25C;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+.game-over {
+  font-size: 24px;
+  color: #332357;
+  font-weight: bold;
+  margin: 20px 0;
 }
 
 /* Tiles Styling  */

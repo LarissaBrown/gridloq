@@ -5,22 +5,24 @@ const { enableCors, validateAuthToken } = require('./middleware/auth');
 const { staticSiteRouter } = require('./routes/static');
 const { errorHandler, logger } = require('./middleware/log');
 const { createServer } = require('http');
+const gameRouter = require('./routes/gameRouter');
+const gameRateLimiter = require('./middleware/rateLimiter');
 
 const app = ex();
-const server = createServer(app)
+const server = createServer(app);
 
-app.use(logger)
-app.use(enableCors)
-app.use(ex.static(path.resolve(__dirname, 'client', 'dist')))
+app.use(logger);
+app.use(enableCors);
 app.use(ex.json());
 app.use(ex.urlencoded({ extended: true }));
 
-app.use('/api', validateAuthToken, apiRouter)
-app.get('*', staticSiteRouter)
+// Fix the router usage order and syntax
+app.use('/api/game', gameRateLimiter, gameRouter);
+app.use('/api', validateAuthToken, apiRouter);
+app.get('*', staticSiteRouter);
 
 app.use(errorHandler);
 
-
 module.exports = {
     server
-}
+};

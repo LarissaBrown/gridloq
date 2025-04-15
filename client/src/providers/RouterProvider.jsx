@@ -5,7 +5,7 @@ import {
 import { Profile } from '../routes/Profile';
 import { Root } from "../routes/Root";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Home } from "../routes/Home";
+import { Home } from "../routes/Home.jsx";
 import { Socket } from "../routes/Socket";
 import { HowToPlay } from "../routes/HowToPlay";
 

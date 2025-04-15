@@ -16,10 +16,11 @@ export const HowToPlay = () => {
             <h3>Game Instructions</h3>
                 
             <ol className='mainOl'>
-              <li>Select to play against the computer or an opponent online.</li>
+              <li>Select to play against the computer (Random Player?) or an opponent online (Random Player?).</li>
               <li>Random player makes the first move in a new game.</li>
               <li>On your turn, the PowerUp machine will automatically roll. If you receive a PowerUp, select to play it or skip.</li>
-              <li>Make your move by selecting a tile. The higher the value, the more points you collect.</li>
+              <li>Make your move by selecting a tile (a value will be shown). The higher the value, the more points you collect.</li>
+              <li>The goal is to connect a minimum of 3 tiles in a row. The more tiles you connect, the more points you collect.</li>
               <li>Once you connect a minimum of 3 tiles, your total tile points is multiplied by the number of tiles you have in a row. For example: You have 3 tiles valued at 4, 3, and 2 = 9, 9 point x 3 tiles = 27.</li>
               <li>The first player to collect 40 points is the winner.</li>
               <li>If a player takes longer than 10 minutes to make a move, they automatically forfeit the game.</li>

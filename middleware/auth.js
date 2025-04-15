@@ -26,7 +26,10 @@ const allow = (permissions) => (req, res, next) => {
     next(Error(`Access denied: ${permissions}. You don't have permission to access requested resource`))
 }
 
-const enableCors = cors({ origin: [...process.env.CORS_WHITELIST.split(','), process.env.AUTH0_ISSUER_BASE_URL] })
+const enableCors = cors({ 
+    origin: [...process.env.CORS_WHITELIST.split(','), process.env.AUTH0_ISSUER_BASE_URL],
+    credentials: true
+});
 
 
 module.exports = {

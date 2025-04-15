@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { http } from "./http";
 import { useAuth0 } from "@auth0/auth0-react";
 import { SocketContext } from "./contexts";
@@ -79,3 +79,59 @@ export const useSocketAPI = () => {
 }
 
 export const useSocketContext = () => useContext(SocketContext);
+
+export const useGameSocket = (gameId) => {
+    const { socket, connected } = useSocketAPI();
+    const [gameState, setGameState] = useState(null);
+
+    useEffect(() => {
+        if (!connected || !gameId) return;
+
+        // Join game room
+        socket.emit('joinGame', { gameId });
+
+        // Listen for game updates
+        socket.on('gameUpdate', (newGameState) => {
+            setGameState(newGameState);
+        });
+
+        return () => {
+            socket.off('gameUpdate');
+            socket.emit('leaveGame', { gameId });
+        };
+    }, [connected, gameId]);
+
+    const makeMove = useCallback(async (row, col) => {
+        if (!connected || !gameId) return;
+
+        try {
+            const response = await fetch('/api/game/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    row,
+                    col,
+                    gameId
+                })
+            });
+
+            const data = await response.json();
+            if (!data.isValidMove) {
+                throw new Error(data.error || 'Invalid move');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Move failed:', error);
+            throw error;
+        }
+    }, [connected, gameId]);
+
+    return {
+        gameState,
+        makeMove,
+        connected
+    };
+};
